@@ -38,6 +38,7 @@
 *.opensdf
 *.sdf
 *.VC.opendb
+*.XCOM_suo
 
 # Precompiled Assets
 SourceArt/**/*.png

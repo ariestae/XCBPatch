@@ -4,7 +4,7 @@
 //  PURPOSE: Defines ability templates
 //--------------------------------------------------------------------------------------- 
 
-class X2Ability_BashPatchAbilitySet extends X2Ability
+class X2Ability_BashPatchAbilitySet extends XMBAbility
 	config(BashPatch);
 
 static function array<X2DataTemplate> CreateTemplates()
@@ -12,6 +12,6 @@ static function array<X2DataTemplate> CreateTemplates()
 	local array<X2DataTemplate> Templates;
 
 	Templates.AddItem(AddCenterMassAbility());
-	Templates.AddItem(PurePassive('HeatEnd', "img:///UILibrary_EMG_Pugilist.UIPerk_burning_finger"));
+	Templates.AddItem(PurePassive('HeatEnd', "img:///UILibrary_PerkIcons.UIPerk_bigbooms"));
 	return Templates;
 }

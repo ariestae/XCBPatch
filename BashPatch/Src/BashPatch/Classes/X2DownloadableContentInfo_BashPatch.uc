@@ -8,7 +8,7 @@
 //  Copyright (c) 2016 Firaxis Games, Inc. All rights reserved.
 //---------------------------------------------------------------------------------------
 
-class X2DownloadableContentInfo_BashPatch extends X2DownloadableContentInfo;
+class X2DownloadableContentInfo_BashPatch extends X2DownloadableContentInfo
 	config(BashPatch);
 
 var config int HeatEndBurnDamage;
@@ -19,17 +19,17 @@ var config int HeatEndBurnSpread;
 /// </summary>
 static event OnPostTemplatesCreated()
 {
+	updateWeapons();
+	updateAbilities();
+}
+
+static function updateWeapons()
+{
 	local X2ItemTemplateManager			ItemTemplateManager;
 	local X2WeaponTemplate				WeaponTemplate;
 	local X2SchematicTemplate			SchematicTemplate;
-	
-	local X2AbilityTemplateManager			AbilityTemplateManager;
-	local X2AbilityTemplate					AbilityTemplate;
-	local X2Condition_AbilityProperty       BurningCondition;
-	local X2Effect_Burning					BurningEffect;
 
 	ItemTemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
-	AbilityTemplateManager = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 
 	//Genji Sword
 	WeaponTemplate = X2WeaponTemplate(ItemTemplateManager.FindItemTemplate('OWODACHI_MG'));
@@ -188,8 +188,18 @@ static event OnPostTemplatesCreated()
 	{
 		SchematicTemplate.CanBeBuilt = false;
 		`log("BashPatch mods SMG_BM_Schematic");
-	}
-	
+	}	
+}
+
+static function updateAbilities()
+{
+	local X2AbilityTemplateManager			AbilityTemplateManager;
+	local X2AbilityTemplate					AbilityTemplate;
+	local X2Condition_AbilityProperty       BurningCondition;
+	local X2Effect_Burning					BurningEffect;
+
+	AbilityTemplateManager = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+
 	//SPARK Strike
 	AbilityTemplate = AbilityTemplateManager.FindAbilityTemplate('Strike');
 	if (AbilityTemplate != none)

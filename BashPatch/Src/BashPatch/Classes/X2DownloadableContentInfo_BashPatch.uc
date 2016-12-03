@@ -13,6 +13,8 @@ class X2DownloadableContentInfo_BashPatch extends X2DownloadableContentInfo
 
 var config int HeatEndBurnDamage;
 var config int HeatEndBurnSpread;
+var config int ElbowRocket_Damage;
+var config int ElbowRocket_Pierce;
 	
 /// <summary>
 /// Called after the Templates have been created (but before they are validated) while this DLC / Mod is installed.
@@ -197,6 +199,9 @@ static function updateAbilities()
 	local X2AbilityTemplate					AbilityTemplate;
 	local X2Condition_AbilityProperty       BurningCondition;
 	local X2Effect_Burning					BurningEffect;
+	local X2Condition_AbilityProperty		AbilityCondition;
+	local X2Effect_ApplyWeaponDamage		WeaponDamageEffect;
+	local X2Effect_OverdriveMobility		OverdriveMobility;
 
 	AbilityTemplateManager = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 
@@ -209,5 +214,27 @@ static function updateAbilities()
 		BurningCondition.OwnerHasSoldierAbilities.AddItem('HeatEnd');
 		BurningEffect.TargetConditions.AddItem(BurningCondition);
 		AbilityTemplate.AddTargetEffect(BurningEffect);
+
+		WeaponDamageEffect = new class'X2Effect_ApplyWeaponDamage';
+		WeaponDamageEffect.bIgnoreBaseDamage = true;
+		WeaponDamageEffect.EffectDamageValue.Damage = default.ElbowRocket_Damage;
+		WeaponDamageEffect.EffectDamageValue.Pierce = default.ElbowRocket_Pierce;
+		AbilityCondition = new class'X2Condition_AbilityProperty';
+		AbilityCondition.OwnerHasSoldierAbilities.AddItem('ElbowRocket');
+		WeaponDamageEffect.TargetConditions.AddItem(AbilityCondition);
+		AbilityTemplate.AddTargetEffect(WeaponDamageEffect);
+	}
+
+	//SPARK Overdrive
+	AbilityTemplate = AbilityTemplateManager.FindAbilityTemplate('Overdrive');
+	if (AbilityTemplate != none)
+	{
+		OverdriveMobility = new class'X2Effect_OverdriveMobility';
+		OverdriveMobility.EffectName = 'BlitzPerk';
+		OverdriveMobility.BuildPersistentEffect( 1, false, true, false, eGameRule_PlayerTurnEnd );
+		AbilityCondition = new class'X2Condition_AbilityProperty';
+		AbilityCondition.OwnerHasSoldierAbilities.AddItem('Blitz');
+		OverdriveMobility.TargetConditions.AddItem(AbilityCondition);
+		AbilityTemplate.AddTargetEffect(OverdriveMobility);
 	}
 }

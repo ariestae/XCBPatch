@@ -13,8 +13,8 @@ class X2DownloadableContentInfo_BashPatch extends X2DownloadableContentInfo
 
 var config int HeatEndBurnDamage;
 var config int HeatEndBurnSpread;
-var config int ElbowRocket_Damage;
-var config int ElbowRocket_Pierce;
+//var config int ElbowRocket_Damage;
+//var config int ElbowRocket_Pierce;
 	
 /// <summary>
 /// Called after the Templates have been created (but before they are validated) while this DLC / Mod is installed.
@@ -215,14 +215,14 @@ static function updateAbilities()
 		BurningEffect.TargetConditions.AddItem(BurningCondition);
 		AbilityTemplate.AddTargetEffect(BurningEffect);
 
-		WeaponDamageEffect = new class'X2Effect_ApplyWeaponDamage';
-		WeaponDamageEffect.bIgnoreBaseDamage = true;
-		WeaponDamageEffect.EffectDamageValue.Damage = default.ElbowRocket_Damage;
-		WeaponDamageEffect.EffectDamageValue.Pierce = default.ElbowRocket_Pierce;
-		AbilityCondition = new class'X2Condition_AbilityProperty';
-		AbilityCondition.OwnerHasSoldierAbilities.AddItem('ElbowRocket');
-		WeaponDamageEffect.TargetConditions.AddItem(AbilityCondition);
-		AbilityTemplate.AddTargetEffect(WeaponDamageEffect);
+		//WeaponDamageEffect = new class'X2Effect_ApplyWeaponDamage';
+		//WeaponDamageEffect.bIgnoreBaseDamage = true;
+		//WeaponDamageEffect.EffectDamageValue.Damage = default.ElbowRocket_Damage;
+		//WeaponDamageEffect.EffectDamageValue.Pierce = default.ElbowRocket_Pierce;
+		//AbilityCondition = new class'X2Condition_AbilityProperty';
+		//AbilityCondition.OwnerHasSoldierAbilities.AddItem('ElbowRocket');
+		//WeaponDamageEffect.TargetConditions.AddItem(AbilityCondition);
+		//AbilityTemplate.AddTargetEffect(WeaponDamageEffect);
 	}
 
 	//SPARK Overdrive

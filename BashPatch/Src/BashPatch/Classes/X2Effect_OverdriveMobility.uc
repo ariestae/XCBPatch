@@ -16,7 +16,7 @@ simulated protected function OnEffectAdded(const out EffectAppliedData ApplyEffe
 	
 	MobilityChange.StatType = eStat_Mobility;
 	MobilityChange.StatAmount = default.OverdriveMobility_Increase;
-	EffectState.StatChanges.AddItem(MobilityChange);
+	NewEffectState.StatChanges.AddItem(MobilityChange);
 
 	super.OnEffectAdded(ApplyEffectParameters, kNewTargetState, NewGameState, NewEffectState);
 }
